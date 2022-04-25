@@ -11,3 +11,11 @@ Date:   Sat Apr 23 21:24:47 2022 +0800
 
     device-trees-amlogic: (mibox3) bump version, remove unneeded device trees
 ```
+
+```
+commit 4e453f53f5d90b86c81435634817ec22cde4118d (tag: 9.2-mibox3-1.1)
+Author: 7Ji <pugokushin@gmail.com>
+Date:   Mon Apr 25 21:09:21 2022 +0800
+
+    mixbox3/filesystem: added keymap to remap home button
+```
