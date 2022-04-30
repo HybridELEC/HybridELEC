@@ -27,3 +27,11 @@ Date:   Thu Apr 28 21:06:27 2022 +0800
 
     mibox3/filesystem/enable_usb_boot.sh: fix set_env storeboot
 ```
+
+```
+commit 8566a5d936c0ecdc5a2f9409f44a264bc7172f73 (tag: 9.2-mibox3-1.3)
+Author: 7Ji <pugokushin@gmail.com>
+Date:   Sat Apr 30 21:30:41 2022 +0800
+
+    mibox3/bootloader: fix storeboot env, quoted content is now properly written
+```
