@@ -43,3 +43,11 @@ Date:   Sat Jul 9 23:30:41 2022 +0800
 
     busybox/fs-resize: adapt distro name for extreme
 ```
+
+```
+commit b3b6c893125ef5ebe36b4b75cb3b6a9f1d12d9d7 (tag: Hybrid-1.0)
+Author: 7Ji <pugokushin@gmail.com>
+Date:   Sun May 8 11:14:57 2022 +0800
+
+    mibox3-hybrid/reboot_to_emuelec: removed var grep as it is not used
+```
