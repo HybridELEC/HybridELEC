@@ -11,11 +11,11 @@ You need to clone the whole respository, checkout and build the modified branch 
 ````
 git clone https://github.com/7Ji/HybridELEC.git
 git checkout coreelec-9.2
-PROJECT=Amlogic DEVICE=mibox3 PROFILE=hybrid make
+CUSTOM_VERSION=1.0 PROJECT=Amlogic DEVICE=mibox3 PROFILE=hybrid make
 git checkout emuelec-4.3
-PROJECT=Amlogic DEVICE=mibox3 PROFILE=hybrid make
+CUSTOM_VERSION=1.0 PROJECT=Amlogic DEVICE=mibox3 PROFILE=hybrid make
 git checkout hybridelec-1.0
-PROJECT=Amlogic DEVICE=mibox3 PROFILE=hybrid make
+CUSTOM_VERSION=1.0 PROJECT=Amlogic DEVICE=mibox3 make
 ````
 
 ## License
