@@ -10,6 +10,7 @@ The main **hybrid-1.0** branch is only for introducing the project via this page
 You need to clone the whole respository, checkout and build the modified branch of **CoreELEC** and **EmuELEC** respectively, then get back to **HybridELEC** and combine the images:
 ````
 git clone https://github.com/7Ji/HybridELEC.git
+cd HybridELEC
 git checkout coreelec-9.2
 CUSTOM_VERSION=1.0 PROJECT=Amlogic DEVICE=mibox3 PROFILE=hybrid make
 git checkout emuelec-4.3
@@ -23,7 +24,7 @@ As a derived work of CoreELEC and EmuELEC, HybridELEC itself is licensed under *
 
 ## Closed-source blobs
 Even though **HybridELEC** itself is open-source, there are several closed-source blobs included in the repository:  
-1. **u-boot** needed to build the image is extracted from the stock image shipped from **Xiaomi**
+1. **u-boot** and **DDR** needed to build the image is extracted from the stock image shipped from **Xiaomi**
 2. The tool to build it is also closed-source blob leaked from **Amlogic**
 
 
