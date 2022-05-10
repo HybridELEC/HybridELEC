@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2022-present 7Ji (pugokushin@gmail.com)
+
+dir_clean_create() {
+    [[ -z "$1" ]] && echo 'Must define directory as first argument!'
+    if [[ -e "$1" ]]; then
+        [[ ! -d "$1" ]] && echo "ERROR: '$1' exists and is not a folder" && exit
+        rm -rf "$1"
+    fi
+    mkdir -p "$1"
+}
+
+DIR_BUILD="build.HybridELEC-$DEVICE"
+DIR_IMAGE="$DIR_BUILD/image"
+DIR_DATA="$DIR_BUILD/data"
+
+for DIR in "$DIR_BUILD" "$DIR_IMAGE" "$DIR_DATA" "$DIR_DATA/coreelec" "$DIR_DATA/emuelec"; do
+    dir_clean_create "$DIR"
+done
+
+IMAGE_DATA_BASE="$DIR_IMAGE/data"
+IMAGE_DATA_RAW="$IMAGE_DATA_BASE.RAW"
+IMAGE_DATA_SPARSE="$IMAGE_DATA_BASE.PARTITION"
+
+truncate -s 2938802176 "$IMAGE_DATA_RAW"
+fakeroot mkfs.ext4 -m 0 -d "$DIR_DATA" "$IMAGE_DATA_RAW"
+img2simg "$IMAGE_DATA_RAW" "$IMAGE_DATA_SPARSE"
+rm -f "$IMAGE_DATA_RAW"
+cp "build.CoreELEC-$DEVICE.arm-9.2-devel/image/system/usr/share/bootloader/dtb.img" "$DIR_IMAGE/meson1.dtb"
+cp "projects/$PROJECT/devices/$DEVICE/"* "$DIR_IMAGE/"
+
+CE_BASE="target/CoreELEC-$DEVICE.arm-9.2-$CUSTOM_VERSION"
+cp "$CE_BASE.kernel" "$DIR_IMAGE/boot.PARTITION"
+cp "$CE_BASE.system" "$DIR_IMAGE/system.PARTITION"
+EE_BASE="target/EmuELEC-$DEVICE.aarch64-$CUSTOM_VERSION"
+cp "$EE_BASE.kernel" "$DIR_IMAGE/eboot.PARTITION"
+cp "$EE_BASE.system" "$DIR_IMAGE/esystem.PARTITION"
+
+./tools/aml_image_v2_packer -r "$DIR_IMAGE/image.cfg" "$DIR_IMAGE" "target/HybridELEC-$DEVICE-$CUSTOM_VERSION.img"
