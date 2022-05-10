@@ -1,6 +1,6 @@
 # HybridELEC
-HybridELEC aims to bring **side-by-side dual-booting** support to **CoreELEC** and **EmuELEC** on **internal storage** many assumed impossible, it is born as a byproduct of heavily reverse-engineering the **Xiaomi mibox3/3c (MDZ-16-AA)**, but is supposed to work on similiar hardware (**gxbb_p200_1g**).   
-Unlike upstream **CoreELEC** and **EmuELEC**, **HybridELEC** only offers **USB Burning Tool** flashable images, and is distributed on a per-device level, as the dual-booting feature relies on modifying the partition layout via [**device-tree**](https://github.com/7Ji/HybridELEC/blob/25cf23d6e737d6a85f01da149851b4e4a0efbf84/projects/Amlogic/packages/device-tree-mibox3/hybrid.dts) during the USB Burning process.   
+HybridELEC brings **side-by-side dual-booting** support to **CoreELEC** and **EmuELEC** on **internal storage** many assumed impossible, it is born as a byproduct of heavily reverse-engineering the **Xiaomi mibox3/3c (MDZ-16-AA)**, but is supposed to work on similiar hardware (**gxbb_p200_1g**).   
+Unlike upstream **CoreELEC** and **EmuELEC**, **HybridELEC** only offers **USB Burning Tool** flashable images, and is distributed on a **per-device** level, as the dual-booting feature relies on modifying the partition layout via [**device-tree**](https://github.com/7Ji/HybridELEC/blob/25cf23d6e737d6a85f01da149851b4e4a0efbf84/projects/Amlogic/packages/device-tree-mibox3/hybrid.dts) during the USB Burning process.   
 
 
 ## Project Structure
