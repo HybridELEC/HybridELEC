@@ -36,6 +36,7 @@ IMAGE_SYSTEM="$DIR_IMAGE/system.PARTITION"
 cp -ra "build.CoreELEC-$DEVICE.arm-9.2-devel/image/system" "$DIR_SYSTEM/coreelec"
 cp -ra "build.EmuELEC-$DEVICE.aarch64-4.3/image/system" "$DIR_SYSTEM/emuelec"
 
+fakeroot chown 0:0 -R "$DIR_SYSTEM"
 fakeroot mksquashfs "$DIR_SYSTEM" "$IMAGE_SYSTEM" -noappend -comp lzo -Xcompression-level 9 -b 524288
 
 cp "build.CoreELEC-$DEVICE.arm-9.2-devel/image/system/usr/share/bootloader/dtb.img" "$DIR_IMAGE/meson1.dtb"
