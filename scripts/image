@@ -15,8 +15,9 @@ dir_clean_create() {
 DIR_BUILD="build.HybridELEC-$DEVICE"
 DIR_IMAGE="$DIR_BUILD/image"
 DIR_DATA="$DIR_BUILD/data"
+DIR_SYSTEM="$DIR_BUILD/system"
 
-for DIR in "$DIR_BUILD" "$DIR_IMAGE" "$DIR_DATA" "$DIR_DATA/coreelec" "$DIR_DATA/emuelec"; do
+for DIR in "$DIR_BUILD" "$DIR_IMAGE" "$DIR_DATA" "$DIR_DATA/coreelec" "$DIR_DATA/emuelec" "$DIR_SYSTEM"; do
     dir_clean_create "$DIR"
 done
 
@@ -29,14 +30,22 @@ truncate -s 512M "$IMAGE_DATA_RAW"
 fakeroot mkfs.ext4 -m 0 -d "$DIR_DATA" "$IMAGE_DATA_RAW"
 img2simg "$IMAGE_DATA_RAW" "$IMAGE_DATA_SPARSE"
 rm -f "$IMAGE_DATA_RAW"
+
+IMAGE_SYSTEM="$DIR_IMAGE/system.PARTITION"
+
+cp -ra "build.CoreELEC-$DEVICE.arm-9.2-devel/image/system" "$DIR_SYSTEM/coreelec"
+cp -ra "build.EmuELEC-$DEVICE.aarch64-4.3/image/system" "$DIR_SYSTEM/emuelec"
+
+fakeroot mksquashfs "$DIR_SYSTEM" "$IMAGE_SYSTEM" -noappend -comp lzo -Xcompression-level 9 -b 524288
+
 cp "build.CoreELEC-$DEVICE.arm-9.2-devel/image/system/usr/share/bootloader/dtb.img" "$DIR_IMAGE/meson1.dtb"
 cp "projects/$PROJECT/devices/$DEVICE/"* "$DIR_IMAGE/"
 
 CE_BASE="target/CoreELEC-$DEVICE.arm-9.2-$CUSTOM_VERSION"
 cp "$CE_BASE.kernel" "$DIR_IMAGE/boot.PARTITION"
-cp "$CE_BASE.system" "$DIR_IMAGE/system.PARTITION"
+#cp "$CE_BASE.system" "$DIR_IMAGE/system.PARTITION"
 EE_BASE="target/EmuELEC-$DEVICE.aarch64-$CUSTOM_VERSION"
 cp "$EE_BASE.kernel" "$DIR_IMAGE/eboot.PARTITION"
-cp "$EE_BASE.system" "$DIR_IMAGE/esystem.PARTITION"
+#cp "$EE_BASE.system" "$DIR_IMAGE/esystem.PARTITION"
 
 ./tools/aml_image_v2_packer -r "$DIR_IMAGE/image.cfg" "$DIR_IMAGE" "target/HybridELEC-$DEVICE-$CUSTOM_VERSION.img"
