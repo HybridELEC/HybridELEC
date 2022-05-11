@@ -37,7 +37,7 @@ As a derived work of CoreELEC and EmuELEC, HybridELEC itself is licensed under *
 
 ## Closed-source blobs
 Even though **HybridELEC** itself is open-source, there are several closed-source blobs included in the repository:  
-1. **u-boot** and **DDR** needed to build the image is extracted from the stock image shipped from **Xiaomi**
+1. **u-boot** and **DDR** needed to build the image are extracted from the stock image shipped from **Xiaomi**
 2. The tool to build it is also closed-source blob leaked from **Amlogic**
 
 
