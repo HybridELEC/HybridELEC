@@ -9,14 +9,27 @@ The main **hybrid-1.0** branch is only for introducing the project via this page
 ## Build yourself
 You need to clone the whole respository, checkout and build the modified branch of **CoreELEC** and **EmuELEC** respectively, then get back to **HybridELEC** and combine the images:
 ````
+# Clone the repository
 git clone https://github.com/7Ji/HybridELEC.git
 cd HybridELEC
+
+# Set environment
+export CUSTOM_VERSION=hybrid-1.1
+export PROJECT=Amlogic
+export DEVICE=mibox3
+export PROFILE=hybrid
+
+# Build modified CoreELEC
 git checkout coreelec-9.2
-CUSTOM_VERSION=1.0 PROJECT=Amlogic DEVICE=mibox3 PROFILE=hybrid make
+make system
+
+# Build modified EmuELEC
 git checkout emuelec-4.3
-CUSTOM_VERSION=1.0 PROJECT=Amlogic DEVICE=mibox3 PROFILE=hybrid make
-git checkout hybridelec-1.0
-CUSTOM_VERSION=1.0 PROJECT=Amlogic DEVICE=mibox3 make
+make system
+
+# Pack the image
+git checkout hybrid-1.0
+make
 ````
 
 ## License
