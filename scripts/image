@@ -11,42 +11,71 @@ dir_clean_create() {
     fi
     mkdir -p "$1"
 }
+die() {
+    echo "$1"
+    exit
+}
 
 DIR_BUILD="build.HybridELEC-$DEVICE"
 DIR_IMAGE="$DIR_BUILD/image"
 DIR_DATA="$DIR_BUILD/data"
 DIR_SYSTEM="$DIR_BUILD/system"
 
+echo 'Creating image layout...'
 for DIR in "$DIR_BUILD" "$DIR_IMAGE" "$DIR_DATA" "$DIR_DATA/coreelec" "$DIR_DATA/emuelec" "$DIR_SYSTEM"; do
     dir_clean_create "$DIR"
 done
 
+echo 'Creating disk image for data partition...'
 IMAGE_DATA_BASE="$DIR_IMAGE/data"
 IMAGE_DATA_RAW="$IMAGE_DATA_BASE.RAW"
 IMAGE_DATA_SPARSE="$IMAGE_DATA_BASE.PARTITION"
 
 touch "$DIR_DATA/.please_resize_me"
-truncate -s 512M "$IMAGE_DATA_RAW"
-fakeroot mkfs.ext4 -m 0 -d "$DIR_DATA" "$IMAGE_DATA_RAW"
-img2simg "$IMAGE_DATA_RAW" "$IMAGE_DATA_SPARSE"
+echo 'Allocating space for raw data image...'
+truncate -s 512M "$IMAGE_DATA_RAW" || die 'Failed to allocate'
+echo 'Making ext4 filesystem on the raw data image...'
+fakeroot mkfs.ext4 -m 0 -d "$DIR_DATA" "$IMAGE_DATA_RAW" || die 'Failed to make image'
+echo 'Converting raw data image to sparse image...'
+img2simg "$IMAGE_DATA_RAW" "$IMAGE_DATA_SPARSE" || die 'Failed to convert'
+echo 'Removing raw data image...'
 rm -f "$IMAGE_DATA_RAW"
 
+echo 'Creating system partition layout...'
 IMAGE_SYSTEM="$DIR_IMAGE/system.PARTITION"
 
-cp -ra "build.CoreELEC-$DEVICE.arm-9.2-devel/image/system" "$DIR_SYSTEM/coreelec"
-cp -ra "build.EmuELEC-$DEVICE.aarch64-4.3/image/system" "$DIR_SYSTEM/emuelec"
+echo 'Copying CoreELEC system...'
+cp -ra "build.CoreELEC-$DEVICE.arm-9.2-devel/image/system" "$DIR_SYSTEM/coreelec" || die 'Failed to copy CoreELEC system'
+echo 'Copying EmuELEC system...'
+cp -ra "build.EmuELEC-$DEVICE.aarch64-4.3/image/system" "$DIR_SYSTEM/emuelec" || die ' Failed to copy EmuELEC system'
 
-fakeroot chown 0:0 -R "$DIR_SYSTEM"
-fakeroot mksquashfs "$DIR_SYSTEM" "$IMAGE_SYSTEM" -noappend -comp lzo -Xcompression-level 9 -b 524288
+echo 'Running fakeroot script: changing owner of system folder to root, recursively'
+fakeroot chown 0:0 -R "$DIR_SYSTEM" || die 'Failed to chown'
+echo 'Running fakeroot script: making squashfs'
+fakeroot mksquashfs "$DIR_SYSTEM" "$IMAGE_SYSTEM" -noappend -comp lzo -Xcompression-level 9 -b 524288 || die 'Failed to making squashfs'
 
-cp "build.CoreELEC-$DEVICE.arm-9.2-devel/image/system/usr/share/bootloader/dtb.img" "$DIR_IMAGE/meson1.dtb"
-cp "projects/$PROJECT/devices/$DEVICE/"* "$DIR_IMAGE/"
+echo 'Finding dtb...'
+DTB="build.CoreELEC-$DEVICE.arm-9.2-devel/device-tree-$DEVICE-1.0/*.dtb"
+[[ ! -f "$DTB" ]] && DTB="build.CoreELEC-$DEVICE.arm-9.2-devel/image/system/usr/share/bootloader/dtb.img"
+[[ ! -f "$DTB" ]] && DTB="build.EmuELEC-$DEVICE.aarch64-4.3/device-tree-$DEVICE-1.0/*.dtb"
+[[ ! -f "$DTB" ]] && DTB="build.EmuELEC-$DEVICE.aarch64-4.3/image/system/usr/share/bootloader/dtb.img"
+[[ ! -f "$DTB" ]] && die 'Failed to find dtb'
+echo "Using $DTB"
+echo 'Copying dtb...'
+cp "build.CoreELEC-$DEVICE.arm-9.2-devel/image/system/usr/share/bootloader/dtb.img" "$DIR_IMAGE/meson1.dtb" || die 'Failed to copy dtb'
+echo 'Copying device-specific stuffs'
+cp "projects/$PROJECT/devices/$DEVICE/"* "$DIR_IMAGE/" || die 'Failed to copy device-specific stuffs'
 
-CE_BASE="target/CoreELEC-$DEVICE.arm-9.2-$CUSTOM_VERSION"
+echo 'Copying CoreELEC kernel...'
+CE_BASE="target/CoreELEC-$DEVICE.arm-9.2-$CUSTOM_VERSION" || die 'Failed to copy CoreELEC kernel'
 cp "$CE_BASE.kernel" "$DIR_IMAGE/boot.PARTITION"
-#cp "$CE_BASE.system" "$DIR_IMAGE/system.PARTITION"
-EE_BASE="target/EmuELEC-$DEVICE.aarch64-$CUSTOM_VERSION"
-cp "$EE_BASE.kernel" "$DIR_IMAGE/eboot.PARTITION"
-#cp "$EE_BASE.system" "$DIR_IMAGE/esystem.PARTITION"
 
-./tools/aml_image_v2_packer -r "$DIR_IMAGE/image.cfg" "$DIR_IMAGE" "target/HybridELEC-$DEVICE-$CUSTOM_VERSION.img"
+echo 'Copying EmuELEC kernel...'
+EE_BASE="target/EmuELEC-$DEVICE.aarch64-$CUSTOM_VERSION" || die 'Failed to copy EmuELEC kernel'
+cp "$EE_BASE.kernel" "$DIR_IMAGE/eboot.PARTITION"
+
+echo 'Packing image....'
+IMAGE_TARGET="target/HybridELEC-$DEVICE-$CUSTOM_VERSION.img"
+./tools/aml_image_v2_packer -r "$DIR_IMAGE/image.cfg" "$DIR_IMAGE" "$IMAGE_TARGET" || die 'Failed to pack image'
+
+echo "Done, check $IMAGE_TARGET"
