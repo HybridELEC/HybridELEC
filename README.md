@@ -14,10 +14,13 @@ git clone https://github.com/7Ji/HybridELEC.git
 cd HybridELEC
 
 # Set environment
-export CUSTOM_VERSION=hybrid-1.1
+export CUSTOM_VERSION=hybrid-1.2
 export PROJECT=Amlogic
 export DEVICE=mibox3
 export PROFILE=hybrid
+
+# Optionally set builder name
+export BUILDER_NAME=7Ji
 
 # Build modified CoreELEC
 git checkout coreelec-9.2
