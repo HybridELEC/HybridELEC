@@ -6,6 +6,39 @@ Unlike upstream **CoreELEC** and **EmuELEC**, **HybridELEC** only offers **USB B
 ## Project Structure
 The main **hybrid-1.0** branch is only for introducing the project via this page, and packging the whole image. The modified **CoreELEC** and **EmuELEC** sources reside on [**coreelec-9.2**][coreelec-9.2] and [**emuelec-4.3**][emuelec-4.3] branches
 
+## How it works
+During flashing, HybridELEC divides the internal storage to 5 partitions:
+
+0. **logo** The partition where HybridELEC logo is stored, only 20KiB
+1. **boot** The partition where CoreELEC kernel is stored
+2. **eboot** The partition where EmuELEC kernel is stored
+3. **system** The partition where CoreELEC + EmuELEC system is stored
+
+    *The filesystem on this partition is a squashfs compressed with lzo level 9 consisting of 2 subfolders:*
+
+    1. coreelec, this is where CoreELEC sysroot is stored
+    2. emuelec, this is where EmuELEC sysroot is stored
+4. **data** The partition where user data is stored
+
+    *The filesystem on this partition is an ext4 consisting of 2 subfolders:*
+    1. coreelec, this is where userdata for CoreELEC is stored
+    2. emuelec, this is where userdata for EmuELEC is stored
+
+*All partitions' size will be rounded up to multiplies of 4KiB, equal to or slightly larger than actual content*
+
+During bootup, the modified inits of two systems mount their filesystem tree **differently**:
+1. Both mount **/dev/system** to **/system**
+2. **CoreELEC** mounts **/system/coreelec** to **/sysroot**; **EmuELEC** mounts **/system/emuelec** to **/sysroot**
+3. Both umount **/system**
+4. Both mount **/dev/data** to **/data**
+5. **CoreELEC** mounts **/data/coreelec** to **/storage**; **EmuELEC** mounts **/data/emuelec** to **/storage**
+6. Both move **/data** to **/sysroot/data**
+7. Both move **/storage** to **/sysroot/storage**
+8. Both switchroot to **/sysroot**
+
+**/data** is purposedly not umounted so you can edit userdata of both systems even you're only booting one of them, and factory-reset the other system easily (simply ``rm -rf /data/emuelec && mkdir /data/emuelec`` from CoreELEC, and vice-versa)
+
+
 ## Build yourself
 You need to clone the whole respository, checkout and build the modified branch of **CoreELEC** and **EmuELEC** respectively, then get back to **HybridELEC** and combine the images:
 ````
