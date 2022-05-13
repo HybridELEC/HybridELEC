@@ -12,14 +12,11 @@ During flashing, HybridELEC divides the internal storage to 5 partitions:
 0. **logo** The partition where HybridELEC logo is stored, only 20KiB
 1. **boot** The partition where CoreELEC kernel is stored
 2. **eboot** The partition where EmuELEC kernel is stored
-3. **system** The partition where CoreELEC + EmuELEC system is stored
-
+3. **system** The partition where CoreELEC + EmuELEC system is stored   
     *The filesystem on this partition is a squashfs compressed with lzo level 9 consisting of 2 subfolders:*
-
     1. coreelec, this is where CoreELEC sysroot is stored
     2. emuelec, this is where EmuELEC sysroot is stored
-4. **data** The partition where user data is stored
-
+4. **data** The partition where user data is stored  
     *The filesystem on this partition is an ext4 consisting of 2 subfolders:*
     1. coreelec, this is where userdata for CoreELEC is stored
     2. emuelec, this is where userdata for EmuELEC is stored
