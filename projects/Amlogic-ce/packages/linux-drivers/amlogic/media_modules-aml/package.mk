@@ -2,8 +2,8 @@
 # Copyright (C) 2018-present Team CoreELEC (https://coreelec.org)
 
 PKG_NAME="media_modules-aml"
-PKG_VERSION="7baa57eedfc106db99d282697f33dd5fd162255a"
-PKG_SHA256="41ff2c7bdf18ac4c3975407d8c2389bb816fe99af6115fc2f3d0031165309d6d"
+PKG_VERSION="ad0c7af3f96a74dd363890a90e842c1b801becd3"
+PKG_SHA256="449652f3d7b15cb77a0e49ddb41c8a791e1e6b38748141803d52bfbbe54dc841"
 PKG_LICENSE="GPL"
 PKG_SITE="https://coreelec.org"
 PKG_URL="https://github.com/CoreELEC/media_modules-aml/archive/$PKG_VERSION.tar.gz"
@@ -34,11 +34,16 @@ make_target() {
     CONFIG_AMLOGIC_MEDIA_VDEC_AVS=m \
     CONFIG_AMLOGIC_MEDIA_VDEC_AVS_MULTI=m \
     CONFIG_AMLOGIC_MEDIA_VDEC_AVS2=m \
+    CONFIG_AMLOGIC_MEDIA_VDEC_AV1=m \
     CONFIG_AMLOGIC_MEDIA_VENC_H264=m \
+    CONFIG_AMLOGIC_MEDIA_VENC_JPEG=m \
     CONFIG_AMLOGIC_MEDIA_VENC_H265=m
 }
 
 makeinstall_target() {
   mkdir -p $INSTALL/$(get_full_module_dir)/$PKG_NAME
     find $PKG_BUILD/ -name \*.ko -not -path '*/\.*' -exec cp {} $INSTALL/$(get_full_module_dir)/$PKG_NAME \;
+
+  mkdir -p ${INSTALL}/$(get_full_firmware_dir)/video
+    cp -PR ${PKG_BUILD}/firmware/. ${INSTALL}/$(get_full_firmware_dir)/video
 }
