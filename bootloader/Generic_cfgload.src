@@ -7,14 +7,18 @@ setenv vout "1080p60hz"
 setenv frac_rate_policy "0"
 setenv native_4k_gui "0"
 
-if test "${hybrid_ce}" = "yes"; then setenv hybrid_kernel "ce_kernel.img"; else setenv hybrid_kernel "ee_kernel.img"; fi
+if test "${hybrid_ce}" = "yes"; then setenv hybrid_prefix "ce"; else setenv hybrid_prefix "ee"; fi
+
+setenv hybrid_kernel "${hybrid_prefix}_kernel.img"
+setenv hybrid_config "${hybrid_prefix}_config.ini"
+setenv hybrid_dtb "${hybrid_prefix}_dtb.img"
 
 setenv rootopt "BOOT_IMAGE=${hybrid_kernel} boot=LABEL=COREELEC disk=LABEL=STORAGE"
 if test "${ce_on_emmc}" = "yes"; then setenv rootopt "BOOT_IMAGE=${hybrid_kernel} boot=LABEL=CE_FLASH disk=FOLDER=/dev/CE_STORAGE"; fi
 
 if fatload ${device} ${devnr}:${partnr} ${loadaddr} resolution.ini; then env import -t ${loadaddr} ${filesize}; fi
 if test "${allfmt_names}" != ""; then for name in ${allfmt_names}; do if test "${kernel_hdmimode}" = ${name}; then setenv vout ${name}; fi; done; fi
-if fatload ${device} ${devnr}:${partnr} ${loadaddr} config.ini; then env import -t ${loadaddr} ${filesize}; fi
+if fatload ${device} ${devnr}:${partnr} ${loadaddr} ${hybrid_config}; then env import -t ${loadaddr} ${filesize}; fi
 
 setenv consoleopt "console=ttyS0,115200 console=tty0 no_console_suspend"
 
@@ -30,8 +34,8 @@ setenv displayopt "vout=${vout},en logo=osd0,loaded,${fb_addr} frac_rate_policy=
 setenv initargs "${rootopt} ${consoleopt} ${max_freq_a53} ${max_freq_a73} ${wol} ${cec} ${gpiopower} ${usbopts} ${cmode}"
 setenv bootargs "${bootargs} ${initargs} ${displayopt} ${coreelec}"
 
-fatload ${device} ${devnr}:${partnr} ${loadaddr} kernel.img
-fatload ${device} ${devnr}:${partnr} ${dtb_mem_addr} dtb.img
+fatload ${device} ${devnr}:${partnr} ${loadaddr} ${hybrid_kernel}
+fatload ${device} ${devnr}:${partnr} ${dtb_mem_addr} ${hybrid_dtb}
 
 bootm ${loadaddr}
 bootm start
