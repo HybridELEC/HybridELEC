@@ -14,7 +14,7 @@ setenv hybrid_config "${hybrid_prefix}_config.ini"
 setenv hybrid_dtb "${hybrid_prefix}_dtb.img"
 
 setenv rootopt "BOOT_IMAGE=${hybrid_kernel} boot=LABEL=HYBRIDELEC disk=LABEL=STORAGE"
-if test "${ce_on_emmc}" = "yes"; then setenv rootopt "BOOT_IMAGE=${hybrid_kernel} boot=/dev/hesystem disk=FOLDER=/dev/hestorage"; fi
+if test "${ce_on_emmc}" = "yes"; then setenv rootopt "BOOT_IMAGE=${hybrid_kernel} boot=/dev/hesystem disk=/dev/hestorage"; fi
 
 if fatload ${device} ${devnr}:${partnr} ${loadaddr} resolution.ini; then env import -t ${loadaddr} ${filesize}; fi
 if test "${allfmt_names}" != ""; then for name in ${allfmt_names}; do if test "${kernel_hdmimode}" = ${name}; then setenv vout ${name}; fi; done; fi
