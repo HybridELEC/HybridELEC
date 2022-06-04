@@ -26,6 +26,8 @@ The ``hybrid-ng`` branch is only for introduction of the project, and packing th
     1. Press the power-button icon on the top-left of the kodi main screen (the skin must be CoreELEC/Estuary) to open the power-button menu
     2. Select 'Reboot to EmuELEC'
 
+Notice: the methods above only change the booting OS **INSIDE** HybridELC, and do not change the whole CE/EE booting order, which means the USB->SD->emmc->(Android) order is not affected. So if you have official EE on USB, and HybridELEC on SD, and you are running EE on SD, then after you select 'REBOOT TO COREELEC', you'll reboot to the official EE on USB, unless you unplug the USB.
+
 ## Device support status
 1. All devices supported by the generic Amlogic-ng image of **BOTH** CoreELEC and EmuELEC are **SUPPORTED**
 2. Devices that need specialized images are **UNSUPPORTED** since I don't have any of them for validation (Odroid N2, Odroid C4, etc)
