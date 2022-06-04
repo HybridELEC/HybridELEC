@@ -18,6 +18,13 @@ The ``hybrid-ng`` branch is only for introduction of the project, and packing th
 5. Eject the drive, and plug it onto a powered off compatible Amlogic box
 6. Hold the reset button and plug the power
 
+## Switch OS
+* EmuELEC->CoreELEC
+    1. Press select key on your joystick in the main menu to open the quick access menu
+    2. Select 'REBOOT TO COREELEC'
+* CoreELEC->EmuELEC
+    1. Press the power-button icon on the top-left of the kodi main screen (the skin must be CoreELEC/Estuary) to open the power-button menu
+    2. Select 'Reboot to EmuELEC'
 
 ## Device support status
 1. All devices supported by the generic Amlogic-ng image of **BOTH** CoreELEC and EmuELEC are **SUPPORTED**
