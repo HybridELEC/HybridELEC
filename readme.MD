@@ -35,3 +35,11 @@ Date:   Sat Apr 30 21:30:41 2022 +0800
 
     mibox3/bootloader: fix storeboot env, quoted content is now properly written
 ```
+
+```
+commit 2fb433c46a4a700b03c54b567792c95fd1c7322c (tag: 9.2-mibox3-1.4)
+Author: 7Ji <pugokushin@gmail.com>
+Date:   Sat Jul 9 23:30:41 2022 +0800
+
+    busybox/fs-resize: adapt distro name for extreme
+```
