@@ -1,6 +1,3 @@
-**ARCHIVED UNTIL I FINISH MY 2023 POST-GRADUATTE ADMISSION EXAM ON DEC 24TH AND 25TH  
-归档至23考研结束**
-
 # HybridELEC
 A side-by-side dual-bootable minor fork of both CoreELEC and EmuELEC, enjoy the beauty of both CoreELEC and EmuELEC without continously eject and insert different SD cards/USB drive! Switch the OS with simple one-click GUI operation!
 
