@@ -19,7 +19,7 @@ The firmware will only deploy the systems side-by-side, but being **un-modified 
 
 [Download from Github release](../../releases/tag/hk1-rbox-x4)
 
-|SoC family|SoC name|OEM|Model|
+|SoC family|SoC name|Make|Model|
 |-|-|-|-|
 |SC2|S905X4|HK1|Rbox X4|
 
@@ -34,3 +34,25 @@ The firmware will only deploy the systems side-by-side, but being **un-modified 
 |decimal|`ce_system::213909504:2 ee_system::1111490560:2 frp::2097152:1 factory::8388608:17 vendor_boot_a::25165824:1 tee::33554432:1 logo::8388608:1 misc::2097152:1 dtbo_a::2097152:1 cri_data::8388608:2 param::16777216:2 odm_ext_a::16777216:1 oem_a::33554432:1 boot_a::67108864:1 rsv::16777216:1 metadata::16777216:1 vbmeta_a::2097152:1 vbmeta_system_a::2097152:1 super::2415919104:1 ce_storage::4294967296:4 ee_storage::4294967296:4 userdata::-1:4`
 |hex|`ce_system::0xcc00000:2 ee_system::0x42400000:2 frp::0x200000:1 factory::0x800000:17 vendor_boot_a::0x1800000:1 tee::0x2000000:1 logo::0x800000:1 misc::0x200000:1 dtbo_a::0x200000:1 cri_data::0x800000:2 param::0x1000000:2 odm_ext_a::0x1000000:1 oem_a::0x2000000:1 boot_a::0x4000000:1 rsv::0x1000000:1 metadata::0x1000000:1 vbmeta_a::0x200000:1 vbmeta_system_a::0x200000:1 super::0x90000000:1 ce_storage::0x100000000:4 ee_storage::0x100000000:4 userdata::-1:4`
 |human|`ce_system::204M:2 ee_system::1060M:2 frp::2M:1 factory::8M:17 vendor_boot_a::24M:1 tee::32M:1 logo::8M:1 misc::2M:1 dtbo_a::2M:1 cri_data::8M:2 param::16M:2 odm_ext_a::16M:1 oem_a::32M:1 boot_a::64M:1 rsv::16M:1 metadata::16M:1 vbmeta_a::2M:1 vbmeta_system_a::2M:1 super::2304M:1 ce_storage::4G:4 ee_storage::4G:4 userdata::-1:4`
+
+### BesTV R3300L
+
+[Download from Github release](../../releases/tag/bestv-r3300l)
+
+|SoC family|SoC name|Make|Model|
+|-|-|-|-|
+|GXL|S905L|BesTV|R3300L|
+
+|System|Version|
+|-|-|
+|Android|[v7.5] (MXQ) Aidan's ROM [S905X] [P212, P214 & P242] MXQ Pro 4K 1GB 2GB+ (720pUI & 210DPI)|
+|CoreELEC|CoreELEC-Amlogic-ng.arm-20.0-Nexus|
+|EmuELEC|EmuELEC-Amlogic-ng.aarch64-4.6|
+
+*To use -ng version of CoreELEC & EmuELEC, the Android firmware must be at least 7.1, Aidan's firmware is preferred since it's Android 7.1.2, and Milton's Android 6.0 firmware is deprecated due to this, otherwise I'll have to stick the non-ng version both CE and EE dropped support*
+
+|dsnapshot|partitions|
+|-|-|
+|decimal|`ce_system::239075328:2 ee_system::1111490560:2 logo::33554432:1 recovery::33554432:1 rsv::8388608:1 tee::8388608:1 crypt::33554432:1 misc::33554432:1 boot::33554432:1 system::2147483648:1 cache::536870912:2 ce_storage::536870912:4 ee_storage::1073741824:4 data::-1:4`
+|hex|`ce_system::0xe400000:2 ee_system::0x42400000:2 logo::0x2000000:1 recovery::0x2000000:1 rsv::0x800000:1 tee::0x800000:1 crypt::0x2000000:1 misc::0x2000000:1 boot::0x2000000:1 system::0x80000000:1 cache::0x20000000:2 ce_storage::0x20000000:4 ee_storage::0x40000000:4 data::-1:4`
+|human|`ce_system::228M:2 ee_system::1060M:2 logo::32M:1 recovery::32M:1 rsv::8M:1 tee::8M:1 crypt::32M:1 misc::32M:1 boot::32M:1 system::2G:1 cache::512M:2 ce_storage::512M:4 ee_storage::1024M:4 data::-1:4`
