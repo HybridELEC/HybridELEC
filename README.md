@@ -19,7 +19,7 @@ The firmware will only deploy the systems side-by-side, but being **un-modified 
 
 [Download from Github release](../../releases/tag/hk1-rbox-x4)
 
-|SoC family|SoC name|Make|Model|
+|SoC family|SoC name|Brand|Model|
 |-|-|-|-|
 |SC2|S905X4|HK1|Rbox X4|
 
@@ -39,7 +39,7 @@ The firmware will only deploy the systems side-by-side, but being **un-modified 
 
 [Download from Github release](../../releases/tag/bestv-r3300l)
 
-|SoC family|SoC name|Make|Model|
+|SoC family|SoC name|Brand|Model|
 |-|-|-|-|
 |GXL|S905L|BesTV|R3300L|
 
@@ -56,3 +56,26 @@ The firmware will only deploy the systems side-by-side, but being **un-modified 
 |decimal|`ce_system::239075328:2 ee_system::1111490560:2 logo::33554432:1 recovery::33554432:1 rsv::8388608:1 tee::8388608:1 crypt::33554432:1 misc::33554432:1 boot::33554432:1 system::2147483648:1 cache::536870912:2 ce_storage::536870912:4 ee_storage::1073741824:4 data::-1:4`
 |hex|`ce_system::0xe400000:2 ee_system::0x42400000:2 logo::0x2000000:1 recovery::0x2000000:1 rsv::0x800000:1 tee::0x800000:1 crypt::0x2000000:1 misc::0x2000000:1 boot::0x2000000:1 system::0x80000000:1 cache::0x20000000:2 ce_storage::0x20000000:4 ee_storage::0x40000000:4 data::-1:4`
 |human|`ce_system::228M:2 ee_system::1060M:2 logo::32M:1 recovery::32M:1 rsv::8M:1 tee::8M:1 crypt::32M:1 misc::32M:1 boot::32M:1 system::2G:1 cache::512M:2 ce_storage::512M:4 ee_storage::1024M:4 data::-1:4`
+
+
+### HK1 Box
+
+[Download from Github release](../../releases/tag/hk1-box)
+
+|SoC family|SoC name|Brand|Model|
+|-|-|-|-|
+|SM1|S905X3|HK1|Box|
+
+|System|Version|
+|-|-|
+|Android|u219.HK1_BOX_1000M_9.0.2020.11.16.11.05|
+|CoreELEC|CoreELEC-Amlogic-ng.arm-20.0-Nexus|
+|EmuELEC|EmuELEC-Amlogic-ng.aarch64-4.6|
+
+*Additional modification was made to `boot` and `recovery` partition to shift the hard-coded `root=/dev/mmcblk18` to `root=/dev/mmcblk20`, so the Android system in this image is not technically un-modified*
+
+|dsnapshot|partitions|
+|-|-|
+|decimal|`ce_system::239075328:2 ee_system::1111490560:2 logo::8388608:1 recovery::25165824:1 misc::8388608:1 dtbo::8388608:1 cri_data::8388608:2 param::16777216:2 boot::16777216:1 rsv::16777216:1 metadata::16777216:1 vbmeta::2097152:1 tee::33554432:1 vendor::335544320:1 odm::134217728:1 system::1946157056:1 product::134217728:1 cache::1174405120:2 ce_storage::4294967296:4 ee_storage::4294967296:4 data::-1:4`
+|hex|`ce_system::0xe400000:2 ee_system::0x42400000:2 logo::0x800000:1 recovery::0x1800000:1 misc::0x800000:1 dtbo::0x800000:1 cri_data::0x800000:2 param::0x1000000:2 boot::0x1000000:1 rsv::0x1000000:1 metadata::0x1000000:1 vbmeta::0x200000:1 tee::0x2000000:1 vendor::0x14000000:1 odm::0x8000000:1 system::0x74000000:1 product::0x8000000:1 cache::0x46000000:2 ce_storage::0x100000000:4 ee_storage::0x100000000:4 data::-1:4`
+|human|`ce_system::228M:2 ee_system::1060M:2 logo::8M:1 recovery::24M:1 misc::8M:1 dtbo::8M:1 cri_data::8M:2 param::16M:2 boot::16M:1 rsv::16M:1 metadata::16M:1 vbmeta::2M:1 tee::32M:1 vendor::320M:1 odm::128M:1 system::1856M:1 product::128M:1 cache::1120M:2 ce_storage::4G:4 ee_storage::4G:4 data::-1:4`
