@@ -29,11 +29,7 @@ The firmware will only deploy the systems side-by-side, but being **un-modified 
 |CoreELEC|CoreELEC-Amlogic-ne.arm-20.0-Nexus|
 |EmuELEC|EmuELEC-Amlogic-ng.aarch64-4.6|
 
-|dsnapshot|partitions|
-|-|-|
-|decimal|`ce_system::213909504:2 ee_system::1111490560:2 frp::2097152:1 factory::8388608:17 vendor_boot_a::25165824:1 tee::33554432:1 logo::8388608:1 misc::2097152:1 dtbo_a::2097152:1 cri_data::8388608:2 param::16777216:2 odm_ext_a::16777216:1 oem_a::33554432:1 boot_a::67108864:1 rsv::16777216:1 metadata::16777216:1 vbmeta_a::2097152:1 vbmeta_system_a::2097152:1 super::2415919104:1 ce_storage::4294967296:4 ee_storage::4294967296:4 userdata::-1:4`
-|hex|`ce_system::0xcc00000:2 ee_system::0x42400000:2 frp::0x200000:1 factory::0x800000:17 vendor_boot_a::0x1800000:1 tee::0x2000000:1 logo::0x800000:1 misc::0x200000:1 dtbo_a::0x200000:1 cri_data::0x800000:2 param::0x1000000:2 odm_ext_a::0x1000000:1 oem_a::0x2000000:1 boot_a::0x4000000:1 rsv::0x1000000:1 metadata::0x1000000:1 vbmeta_a::0x200000:1 vbmeta_system_a::0x200000:1 super::0x90000000:1 ce_storage::0x100000000:4 ee_storage::0x100000000:4 userdata::-1:4`
-|human|`ce_system::204M:2 ee_system::1060M:2 frp::2M:1 factory::8M:17 vendor_boot_a::24M:1 tee::32M:1 logo::8M:1 misc::2M:1 dtbo_a::2M:1 cri_data::8M:2 param::16M:2 odm_ext_a::16M:1 oem_a::32M:1 boot_a::64M:1 rsv::16M:1 metadata::16M:1 vbmeta_a::2M:1 vbmeta_system_a::2M:1 super::2304M:1 ce_storage::4G:4 ee_storage::4G:4 userdata::-1:4`
+Partition layout in the firmware: [DTB partitions](https://7ji.github.io/ampart-web-reporter/?dsnapshot=ce_system::213909504:2%20ee_system::1111490560:2%20frp::2097152:1%20factory::8388608:17%20vendor_boot_a::25165824:1%20tee::33554432:1%20logo::8388608:1%20misc::2097152:1%20dtbo_a::2097152:1%20cri_data::8388608:2%20param::16777216:2%20odm_ext_a::16777216:1%20oem_a::33554432:1%20boot_a::67108864:1%20rsv::16777216:1%20metadata::16777216:1%20vbmeta_a::2097152:1%20vbmeta_system_a::2097152:1%20super::2415919104:1%20ce_storage::4294967296:4%20ee_storage::4294967296:4%20userdata::-1:4)
 
 ### BesTV R3300L
 
@@ -51,11 +47,7 @@ The firmware will only deploy the systems side-by-side, but being **un-modified 
 
 *To use -ng version of CoreELEC & EmuELEC, the Android firmware must be at least 7.1, Aidan's firmware is preferred since it's Android 7.1.2, and Milton's Android 6.0 firmware is deprecated due to this, otherwise I'll have to stick the non-ng version both CE and EE dropped support*
 
-|dsnapshot|partitions|
-|-|-|
-|decimal|`ce_system::239075328:2 ee_system::1111490560:2 logo::33554432:1 recovery::33554432:1 rsv::8388608:1 tee::8388608:1 crypt::33554432:1 misc::33554432:1 boot::33554432:1 system::2147483648:1 cache::536870912:2 ce_storage::536870912:4 ee_storage::1073741824:4 data::-1:4`
-|hex|`ce_system::0xe400000:2 ee_system::0x42400000:2 logo::0x2000000:1 recovery::0x2000000:1 rsv::0x800000:1 tee::0x800000:1 crypt::0x2000000:1 misc::0x2000000:1 boot::0x2000000:1 system::0x80000000:1 cache::0x20000000:2 ce_storage::0x20000000:4 ee_storage::0x40000000:4 data::-1:4`
-|human|`ce_system::228M:2 ee_system::1060M:2 logo::32M:1 recovery::32M:1 rsv::8M:1 tee::8M:1 crypt::32M:1 misc::32M:1 boot::32M:1 system::2G:1 cache::512M:2 ce_storage::512M:4 ee_storage::1024M:4 data::-1:4`
+Partition layout in the firmware: [DTB partitions](https://7ji.github.io/ampart-web-reporter/?dsnapshot=ce_system::239075328:2%20ee_system::1111490560:2%20logo::33554432:1%20recovery::33554432:1%20rsv::8388608:1%20tee::8388608:1%20crypt::33554432:1%20misc::33554432:1%20boot::33554432:1%20system::2147483648:1%20cache::536870912:2%20ce_storage::536870912:4%20ee_storage::1073741824:4%20data::-1:4)
 
 
 ### HK1 Box
@@ -74,8 +66,4 @@ The firmware will only deploy the systems side-by-side, but being **un-modified 
 
 *Additional modification was made to `boot` and `recovery` partition to shift the hard-coded `root=/dev/mmcblk18` to `root=/dev/mmcblk20`, so the Android system in this image is not technically un-modified*
 
-|dsnapshot|partitions|
-|-|-|
-|decimal|`ce_system::239075328:2 ee_system::1111490560:2 logo::8388608:1 recovery::25165824:1 misc::8388608:1 dtbo::8388608:1 cri_data::8388608:2 param::16777216:2 boot::16777216:1 rsv::16777216:1 metadata::16777216:1 vbmeta::2097152:1 tee::33554432:1 vendor::335544320:1 odm::134217728:1 system::1946157056:1 product::134217728:1 cache::1174405120:2 ce_storage::4294967296:4 ee_storage::4294967296:4 data::-1:4`
-|hex|`ce_system::0xe400000:2 ee_system::0x42400000:2 logo::0x800000:1 recovery::0x1800000:1 misc::0x800000:1 dtbo::0x800000:1 cri_data::0x800000:2 param::0x1000000:2 boot::0x1000000:1 rsv::0x1000000:1 metadata::0x1000000:1 vbmeta::0x200000:1 tee::0x2000000:1 vendor::0x14000000:1 odm::0x8000000:1 system::0x74000000:1 product::0x8000000:1 cache::0x46000000:2 ce_storage::0x100000000:4 ee_storage::0x100000000:4 data::-1:4`
-|human|`ce_system::228M:2 ee_system::1060M:2 logo::8M:1 recovery::24M:1 misc::8M:1 dtbo::8M:1 cri_data::8M:2 param::16M:2 boot::16M:1 rsv::16M:1 metadata::16M:1 vbmeta::2M:1 tee::32M:1 vendor::320M:1 odm::128M:1 system::1856M:1 product::128M:1 cache::1120M:2 ce_storage::4G:4 ee_storage::4G:4 data::-1:4`
+Partition layout in the firmware: [DTB partitions](https://7ji.github.io/ampart-web-reporter/?dsnapshot=ce_system::239075328:2%20ee_system::1111490560:2%20logo::8388608:1%20recovery::25165824:1%20misc::8388608:1%20dtbo::8388608:1%20cri_data::8388608:2%20param::16777216:2%20boot::16777216:1%20rsv::16777216:1%20metadata::16777216:1%20vbmeta::2097152:1%20tee::33554432:1%20vendor::335544320:1%20odm::134217728:1%20system::1946157056:1%20product::134217728:1%20cache::1174405120:2%20ce_storage::4294967296:4%20ee_storage::4294967296:4%20data::-1:4)
