@@ -1,0 +1,6 @@
+[submodule "distros/EmuELEC"]
+	path = distros/EmuELEC
+	url = https://github.com/7Ji/EmuELEC
+[submodule "distros/CoreELEC"]
+	path = distros/CoreELEC
+	url = https://github.com/7Ji/EmuELEC
