@@ -1,8 +1,10 @@
 # HybridELEC
-A side-by-side dual-bootable minor fork of both CoreELEC and EmuELEC, enjoy the beauty of both CoreELEC and EmuELEC without continously eject and insert different SD cards/USB drive! Switch the OS with simple one-click GUI operation!
+A side-by-side dual-bootable fork of both CoreELEC and EmuELEC
 
 ## Project layout
 The modified CoreELEC and EmuELEC sources reside in the standalone repo https://github.com/7Ji/EmuELEC and are pulled to here as submodules to help shrinking the size of this repo down, and switch to a more sanitized project layout.
+
+The release-only Android+CoreELEC+EmuELEC triple boot burning image is available on its [dedicated branch](https://github.com/7Ji/HybridELEC/tree/android-burning)
 
 As a result of moving most stuffs to other repos and many hacks to remove dangling commits and even fake commits to keep releases working, the old source is pretty much dead and you can't build with the old method and source here. Please wait until I finish the hybridifying of EEv4.6 and CE20.0.
 
