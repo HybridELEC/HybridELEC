@@ -1,4 +1,4 @@
-echo "Using device ${device}, number ${devnr}, partition ${partnr}, CoreELEC on eMMC: ${ce_on_emmc}"
+echo "Using device ${device}, number ${devnr}, partition ${partnr}, HybridELEC on eMMC: ${ce_on_emmc}"
 
 setenv decode_type "0"
 setenv remotewakeupmask "0xffffffff"
@@ -7,7 +7,9 @@ setenv vout "1080p60hz"
 setenv frac_rate_policy "0"
 setenv native_4k_gui "0"
 
-if test "${hybrid_ce}" = "yes"; then setenv hybrid_prefix "ce"; else setenv hybrid_prefix "ee"; fi
+if fatload ${device} ${devnr}:${partnr} ${loadaddr} hybrid.ini; then env import -t ${loadaddr} ${filesize}; fi
+
+if test "${hybrid_distro}" = "ee"; then setenv hybrid_prefix "ee", else setenv hybrid_prefix "ce"; fi
 
 setenv hybrid_kernel "${hybrid_prefix}_kernel.img"
 setenv hybrid_config "${hybrid_prefix}_config.ini"
