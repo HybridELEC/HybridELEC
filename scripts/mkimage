@@ -75,7 +75,7 @@ echo 'Creating system img...'
 fakeroot mksquashfs "$DIR_SYSTEM" "$DIR_PART1/SYSTEM" -noappend -comp lzo -Xcompression-level 9 -b 524288
 
 echo 'Creating md5sums...'
-for FILE in "$DIR_SYSTEM/ce_kernel.img" "$DIR_SYSTEM/ee_kernel.img" "$DIR_SYSTEM/SYSTEM"; do
+for FILE in "$DIR_PART1/"{ce_kernel.img,ee_kernel.img,SYSTEM}; do
     md5sum "$FILE" > "$FILE.md5" || die "Failed to calculate md5sum of '$FILE'"
 done
 
