@@ -41,13 +41,13 @@ Hold the reset button with the drive plugged in, and power on the box
 Note this branch uses the **same** bootup setting script as CoreELEC/EmuELEC, so the order is the same *among different drives*, i.e. you can't change the following order:  
 注意本分支和CoreELEC/EmuELEC使用相同的启动设置脚本，所以*不同驱动器之间*的顺序是相同的
 ```
-official CoreELEC/ official EmuELEC/ HybirdELEC on SD
+CoreELEC / EmuELEC / HybirdELEC (CE/EE) on SD
                          |
                          v
-official CoreELEC/ official EmuELEC/ HybridELEC on USB
+CoreELEC / EmuELEC / HybridELEC (CE/EE) on USB
                          |
                          v
-official CoreELEC/ official EmuELEC/ HybridELEC on eMMC                         
+CoreELEC / EmuELEC / HybridELEC (CE/EE) on eMMC
 ```
 What you could change is which one (CE/EE) inside HybridELEC that should be booted into  
 你能改的是HybridELEC内启动的是的哪一个（CE/EE）
@@ -69,7 +69,7 @@ What you could change is which one (CE/EE) inside HybridELEC that should be boot
 
 ### Outside of systems / 系统外
 If you want to change the OS without booting the box, you can just edit the file `hybrid.ini` inside the `HYBRIDELEC` partition, setting it to `hybrid_distro=ce` to boot into CoreELEC; setting it to `hybrid_distro=ee` to boot into EmuELEC  
-如果你想不启动盒子而更改系统，你可以编辑`HYBRIDELEC`分区里的`hybrid.ini`文件，设置为`hybrid_distro=ce`则启动到CoreELEC，设置为`hybrid_distro=ce`则启动到EmuELEC
+如果你想不启动盒子而更改系统，你可以编辑`HYBRIDELEC`分区里的`hybrid.ini`文件，设置为`hybrid_distro=ce`则启动到CoreELEC，设置为`hybrid_distro=ee`则启动到EmuELEC
 
 
 ## Update / 更新
