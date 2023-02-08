@@ -39,7 +39,7 @@ parted -s "$IMAGE_DISK" mkpart primary ext4 2049MiB 100% || die 'Failed to creat
 echo 'Populating part2...'
 touch "$DIR_PART2/.please_resize_me" || die 'Failed to create fs-resize mark'
 mkdir -p "$DIR_PART2/"{core,emu}"elec" || die 'Failed to create ce and ee storage dir'
-fakeroot mkfs.ext4 -m 0 -L 'DATA' -d "$DIR_STORAGE" "$IMAGE_STORAGE" || die 'Failed to create image for part2'
+fakeroot mkfs.ext4 -m 0 -L 'DATA' -d "$DIR_STORAGE" "$IMAGE_PART2" || die 'Failed to create image for part2'
 
 # System partition
 echo 'Populating part1...'
@@ -80,15 +80,15 @@ for FILE in "$DIR_SYSTEM/ce_kernel.img" "$DIR_SYSTEM/ee_kernel.img" "$DIR_SYSTEM
 done
 
 echo 'Mcopying files into system partition..'
-mcopy -i "$IMAGE_SYSTEM" "$DIR_SYSTEM"/* :: || die 'Failed to populate the system partition'
+mcopy -i "$IMAGE_PART1" "$DIR_SYSTEM"/* :: || die 'Failed to populate the system partition'
 echo 'Checking if fat32 on system partition is ok...'
-fsck.vfat -an "$IMAGE_SYSTEM" || die 'Failed to fsck the system partition'
+fsck.vfat -an "$IMAGE_PART1" || die 'Failed to fsck the system partition'
 
 echo 'Merging partitions into whole image...'
-dd if="$IMAGE_SYSTEM" of="$IMAGE_TARGET" bs=1M seek=1 || die 'Failed to write system partition into whole image'
-dd if="$IMAGE_STORAGE" of="$IMAGE_TARGET" bs=1M seek=2049 || die 'Failed to write storage partition into whole image'
+dd if="$IMAGE_PART1" of="$IMAGE_DISK" bs=1M seek=1 || die 'Failed to write system partition into whole image'
+dd if="$IMAGE_PART2" of="$IMAGE_DISK" bs=1M seek=2049 || die 'Failed to write storage partition into whole image'
 
 echo 'Compressing image...'
-pigz -9v "$IMAGE_TARGET" || die 'Failed to compress image'
+pigz -9v "$IMAGE_DISK" || die 'Failed to compress image'
 
 echo 'Everything done'
