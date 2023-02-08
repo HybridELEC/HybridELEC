@@ -6,6 +6,8 @@ die() {
     exit 1
 }
 DEVICE='Amlogic-ng'
+HYBRID_VERSION_CE=20.0-Nexus
+HYBRID_VERSION_EE=v4.6
 DIR_BUILD="build.HybridELEC-$DEVICE"
 DIR_SYSTEM="$DIR_BUILD/system"
 DIR_PART1="$DIR_BUILD/part1"
