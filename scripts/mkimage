@@ -70,7 +70,7 @@ cp -a "$DIR_BUILD_CE/image/system" "$DIR_SYSTEM/coreelec"
 cp -a "$DIR_BUILD_EE/image/system" "$DIR_SYSTEM/emuelec"
 
 echo 'Creating system img...'
-fakeroot mksquashfs "$DIR_SYSTEM" "$DIR_PART1/SYSTEM" -noappend -comp lzo -Xcompression-level 9 -b 524288
+fakeroot mksquashfs "$DIR_SYSTEM" "$DIR_PART1/SYSTEM" -noappend -comp lzo -Xcompression-level 9 -b 524288 || die 'Failed to compress to squashfs'
 
 echo 'Creating md5sums...'
 for FILE in "$DIR_PART1/"{ce_kernel.img,ee_kernel.img,SYSTEM}; do
