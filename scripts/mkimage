@@ -61,8 +61,6 @@ echo 'Copying device-trees...'
 cp -ra "$DIR_DTB_CE" "$DIR_PART1/ce_device_trees" || die 'Failed to copy CE dtb'
 cp -ra "$DIR_DTB_EE" "$DIR_PART1/ee_device_trees" || die 'Failed to copy EE dtb'
 
-build.CoreELEC-Amlogic-ng.arm-20/build/linux-bd0e10d11657ee4771b68dddcbc1948827829818/arch/arm64/boot/Image.lzo
-
 echo 'Copying kernel images...'
 cp -a "$DIR_BUILD_CE/build/linux-"*'/arch/arm64/boot/Image.lzo' "$DIR_PART1/ce_kernel.img" || die 'Failed to copy CE kernel'
 cp -a "$DIR_BUILD_EE/build/linux-"*'/arch/arm64/boot/Image.lzo' "$DIR_PART1/ee_kernel.img" || die 'Failed to copy CE kernel'
