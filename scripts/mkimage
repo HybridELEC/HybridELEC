@@ -90,6 +90,6 @@ dd if="$IMAGE_PART1" of="$IMAGE_DISK" bs=1M seek=1 || die 'Failed to write syste
 dd if="$IMAGE_PART2" of="$IMAGE_DISK" bs=1M seek=2049 || die 'Failed to write storage partition into whole image'
 
 echo 'Compressing image...'
-pigz -9v "$IMAGE_DISK" || die 'Failed to compress image'
+pigz -9fv "$IMAGE_DISK" || die 'Failed to compress image'
 
 echo 'Everything done'
