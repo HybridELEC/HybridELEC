@@ -39,7 +39,7 @@ parted -s "$IMAGE_DISK" mkpart primary ext4 2049MiB 100% || die 'Failed to creat
 echo 'Populating part2...'
 touch "$DIR_PART2/.please_resize_me" || die 'Failed to create fs-resize mark'
 mkdir -p "$DIR_PART2/"{core,emu}"elec" || die 'Failed to create ce and ee storage dir'
-fakeroot mkfs.ext4 -m 0 -L 'DATA' -d "$DIR_STORAGE" "$IMAGE_PART2" || die 'Failed to create image for part2'
+fakeroot mkfs.ext4 -m 0 -L 'DATA' -d "$DIR_PART2" "$IMAGE_PART2" || die 'Failed to create image for part2'
 
 # System partition
 echo 'Populating part1...'
