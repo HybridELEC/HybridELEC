@@ -9,7 +9,7 @@ setenv native_4k_gui "0"
 
 if fatload ${device} ${devnr}:${partnr} ${loadaddr} hybrid.ini; then env import -t ${loadaddr} ${filesize}; fi
 
-if test "${hybrid_distro}" = "ee"; then setenv hybrid_prefix "ee", else setenv hybrid_prefix "ce"; fi
+if test "${hybrid_distro}" = "ee"; then setenv hybrid_prefix "ee"; else setenv hybrid_prefix "ce"; fi
 
 setenv hybrid_kernel "${hybrid_prefix}_kernel.img"
 setenv hybrid_config "${hybrid_prefix}_config.ini"
