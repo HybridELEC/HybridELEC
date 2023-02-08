@@ -51,6 +51,7 @@ echo 'Generating startup scripts...'
 # System content
 mkimage -A arm64 -O linux -T script -C none -d 'bootloader/aml_autoscript.sh' "$DIR_PART1/aml_autoscript" || die "Failed to generate aml_autoscript"
 mkimage -A arm64 -O linux -T script -C none -d 'bootloader/Generic_cfgload.sh' "$DIR_PART1/cfgload" || die "Failed to generate cfgload"
+cp bootloader/hybrid.ini "${DIR_PART1}/" || die "Failed to copy hybrid config"
 
 DIR_BUILD_CE="distros/CoreELEC/build.CoreELEC-$DEVICE.arm-20"
 DIR_BUILD_EE="distros/EmuELEC/build.EmuELEC-$DEVICE.aarch64-4"
