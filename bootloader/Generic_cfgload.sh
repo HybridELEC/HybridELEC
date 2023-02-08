@@ -8,8 +8,7 @@ setenv frac_rate_policy "0"
 setenv native_4k_gui "0"
 
 if fatload ${device} ${devnr}:${partnr} ${loadaddr} hybrid.ini; then env import -t ${loadaddr} ${filesize}; fi
-
-if test "${hybrid_distro}" = "ee"; then setenv hybrid_prefix "ee"; else setenv hybrid_prefix "ce"; fi
+if test "${hybrid_distro}" = "ee"; then setenv hybrid_prefix "ee"; echo "HybridELEC sub system: EmuELEC"; else setenv hybrid_prefix "ce"; echo "HybridELEC sub system: CoreELEC"; fi
 
 setenv hybrid_kernel "${hybrid_prefix}_kernel.img"
 setenv hybrid_config "${hybrid_prefix}_config.ini"
