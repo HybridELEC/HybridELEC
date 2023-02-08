@@ -78,7 +78,7 @@ for FILE in "$DIR_PART1/"{ce_kernel.img,ee_kernel.img,SYSTEM}; do
 done
 
 echo 'Mcopying files into system partition..'
-mcopy -i "$IMAGE_PART1" "$DIR_SYSTEM"/* :: || die 'Failed to populate the system partition'
+mcopy -i "$IMAGE_PART1" "$DIR_PART1"/* :: || die 'Failed to populate the system partition'
 echo 'Checking if fat32 on system partition is ok...'
 fsck.vfat -an "$IMAGE_PART1" || die 'Failed to fsck the system partition'
 
