@@ -67,3 +67,21 @@ Partition layout in the firmware: [DTB partitions](https://7ji.github.io/ampart-
 *Additional modification was made to `boot` and `recovery` partition to shift the hard-coded `root=/dev/mmcblk18` to `root=/dev/mmcblk20`, so the Android system in this image is not technically un-modified*
 
 Partition layout in the firmware: [DTB partitions](https://7ji.github.io/ampart-web-reporter/?dsnapshot=ce_system::239075328:2%20ee_system::1111490560:2%20logo::8388608:1%20recovery::25165824:1%20misc::8388608:1%20dtbo::8388608:1%20cri_data::8388608:2%20param::16777216:2%20boot::16777216:1%20rsv::16777216:1%20metadata::16777216:1%20vbmeta::2097152:1%20tee::33554432:1%20vendor::335544320:1%20odm::134217728:1%20system::1946157056:1%20product::134217728:1%20cache::1174405120:2%20ce_storage::4294967296:4%20ee_storage::4294967296:4%20data::-1:4)
+
+### CumeBox cm2-b
+
+[Download from Github release](../../releases/tag/cm2-b)
+
+|SoC family|SoC name|Brand|Model|
+|-|-|-|-|
+|GXL|S905X|CumeBox|cm2-b|
+
+|System|Version|
+|-|-|
+|Android|[v7.5] (MXQ) Aidan's ROM [S905X] [P212, P214 & P242] MXQ Pro 4K 1GB 2GB+ (720pUI & 210DPI)|
+|CoreELEC|CoreELEC-Amlogic-ng.arm-20.0-Nexus|
+|EmuELEC|EmuELEC-Amlogic-ng.aarch64-4.6|
+
+*The image should work with all S905X (strictly X, not L/W/D) boxes based on p212 reference board with 1G RAM and at least 8G of eMMC in theory, but it's untested*
+
+Partition layout in the firmware: [DTB partitions](https://7ji.github.io/ampart-web-reporter/?dsnapshot=ce_system::239075328:2%20ee_system::1111490560:2%20logo::33554432:1%20recovery::33554432:1%20rsv::8388608:1%20tee::8388608:1%20crypt::33554432:1%20misc::33554432:1%20boot::33554432:1%20system::2147483648:1%20cache::536870912:2%20ce_storage::536870912:4%20ee_storage::1073741824:4%20data::-1:4)
